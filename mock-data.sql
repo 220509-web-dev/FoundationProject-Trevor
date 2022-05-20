@@ -21,14 +21,14 @@ values
     ('https://unsplash.com/photos/rYZkQdz2t9o', 4, 1),
     ('https://unsplash.com/photos/khpWE85ge38', 1, 2),
     ('https://unsplash.com/photos/x6vyL4YKP9c', 5, 3),
-    ('https://unsplash.com/photos/NVjDKvGXsuA', 2, 4);
+    ('https://unsplash.com/photos/NVjDKvGXsuA', 2, 4),
     ('https://unsplash.com/photos/T6d96Qrb5MY', 1, 3);
 
 --QUERIES
 
 select * from app_users;
 
-select * from design 
+select * from design; 
 
 select * from design where design_category = 2;
 
