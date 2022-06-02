@@ -6,18 +6,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionUtility {
-    public static Connection getConnection(){
-        String url = "jdbc:postgresql://localhost:5432/design_style";
-        String username  = "postgres" ;
-        String password = "trevor96" ;
+    public static Connection getConnection() throws SQLException {
+        String url = "jdbc:postgresql://localhost:5432/postgres";
+        String user  = "postgres" ;
+        String password = "revature" ;
         try {
-          Connection connection = DriverManager.getConnection(url, username, password);
-          System.out.println("Connection successful");
-          return connection;
-        } catch (SQLException e) {
-            System.out.println(" Error connecting to Postgres");
+           Class.forName("org.postgresql.Driver");
+            System.out.println("Connection successful");
+        } catch (ClassNotFoundException e) {
+            System.err.println(" Error connecting to Postgres");
             e.printStackTrace();
-            return null;
         }
+        return DriverManager.getConnection(url, user, password);
     }
 }
