@@ -1,6 +1,8 @@
 package app;
 
 
+import java.util.Scanner;
+
 import static utils.CustomLogger.writeToLog;
 
 public class App {
@@ -14,6 +16,8 @@ public class App {
             e.printStackTrace();
             writeToLog(e.toString());
         }
+        Scanner scan = new Scanner(System.in);
+        System.out.println("");
 
     }
 }
