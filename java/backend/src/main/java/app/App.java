@@ -1,16 +1,19 @@
 package app;
 
 
-import dao.UserDAO;
-import dao.UserDBDAO;
-import entities.User;
-
-import java.util.List;
+import static utils.CustomLogger.writeToLog;
 
 public class App {
     public static void main(String[] args) {
-        UserDAO userDAO = new UserDBDAO();
-        User user = new User(5,"John", "Wick", "jwick85@gmail.com", "immortal99", "cantkill99");
-        System.out.println(user);
+        writeToLog("started........");
+        try {
+            for (int i=0;i<5;i++){
+                int d = 10/i;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            writeToLog(e.toString());
+        }
+
     }
 }
