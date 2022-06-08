@@ -1,2 +1,9 @@
+/home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/utils/exceptions/InvalidLoginException.java
+/home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/servlets/SanityServlet.java
+/home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/utils/exceptions/UnavailableUsernameException.java
 /home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/utils/ConnectionUtility.java
+/home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/dao/UserDBDAO.java
+/home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/utils/CustomLogger.java
 /home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/app/App.java
+/home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/entities/User.java
+/home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/dao/UserDAO.java
