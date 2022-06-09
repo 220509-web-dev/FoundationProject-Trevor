@@ -34,7 +34,7 @@ public class UserServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("[LOG] - UserServlet received a request at " + LocalDateTime.now());
+        System.out.println("[LOG] - UserServlet received a GET request at " + LocalDateTime.now());
         // Find all users
             try {
                 UserDAO dao = new UserDBDAO();
@@ -58,9 +58,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("[LOG] - UserServlet received a request at " + LocalDateTime.now());
+        System.out.println("[LOG] - UserServlet received a POST request at " + LocalDateTime.now());
 
-        ObjectMapper mapper = new ObjectMapper();
        User newUser =  mapper.readValue(req.getInputStream(), User.class);
        System.out.println(newUser);
 

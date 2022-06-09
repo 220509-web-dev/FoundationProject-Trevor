@@ -1,11 +1,13 @@
+utils/ConnectionUtility.class
+utils/CustomLogger.class
+servlets/AuthServlet.class
+services/UserService.class
 dao/UserDBDAO.class
 servlets/SanityServlet.class
-utils/ConnectionUtility.class
 dao/UserDAO.class
 entities/User.class
 app/App.class
 utils/ContextLoaderListener.class
-utils/CustomLogger.class
 servlets/UserServlet.class
 utils/exceptions/UnavailableUsernameException.class
 utils/exceptions/InvalidLoginException.class

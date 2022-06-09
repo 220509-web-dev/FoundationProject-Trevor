@@ -11,7 +11,7 @@ public class UserDBDAO implements UserDAO {
 
     @Override
     public User getById(int id) {
-       try (Connection con = ConnectionUtility.getConnection()) {
+       try (Connection con = ConnectionUtility.getInstance().getConnection() ){
 
            String sql = "SELECT * FROM app_users WHERE id = ?";
            PreparedStatement preparedStatement = con.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class UserDBDAO implements UserDAO {
 
     @Override
     public User getByUsername(String username) {
-        try(Connection connection = ConnectionUtility.getConnection()) {
+        try(Connection connection = ConnectionUtility.getInstance().getConnection()) {
             String sql = " SELECT * FROM app_users WHERE username = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -66,7 +66,7 @@ public class UserDBDAO implements UserDAO {
 
     @Override
     public List<User> getAllUsers() {
-        try (Connection con = ConnectionUtility.getConnection()){
+        try (Connection con = ConnectionUtility.getInstance().getConnection()){
             String sql = "SELECT * FROM app_users";
 
             Statement statement = con.createStatement();
@@ -76,28 +76,27 @@ public class UserDBDAO implements UserDAO {
             List<User> userList = new ArrayList<>();
 
             while (resultSet.next()) {
-               userList.add(new User(
-                       resultSet.getInt("id"),
-                       resultSet.getString("first_name"),
-                       resultSet.getString("last_name"),
-                       resultSet.getString("email"),
-                       resultSet.getString("username"),
-                       resultSet.getString("password")
-               ));
+               User user = new User();
 
+               user.setId(resultSet.getInt("id"));
+               user.setFirstName(resultSet.getString("first_name"));
+               user.setLastName(resultSet.getString("last_name"));
+               user.setEmail(resultSet.getString("email"));
+               user.setUsername(resultSet.getString("username"));
+               user.setPassword(resultSet.getString("password"));
+                userList.add(user);
             }
             return userList;
         } catch (SQLException e) {
             System.out.println(" Something went wrong retrieving the users");
             e.printStackTrace();
-
         }
         return null;
     }
 
     @Override
     public int create(User newUser) {
-        try (Connection con = ConnectionUtility.getConnection()){
+        try (Connection con = ConnectionUtility.getInstance().getConnection()){
             String sql = "INSERT INTO app_users (first_name, last_name, email, username, password) "
                         + "VALUES (?, ?, ?, ?, ?) "
                         + "RETURNING app_users.id";
