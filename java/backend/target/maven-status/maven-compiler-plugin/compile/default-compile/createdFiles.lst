@@ -4,6 +4,8 @@ utils/ConnectionUtility.class
 dao/UserDAO.class
 entities/User.class
 app/App.class
+utils/ContextLoaderListener.class
 utils/CustomLogger.class
+servlets/UserServlet.class
 utils/exceptions/UnavailableUsernameException.class
 utils/exceptions/InvalidLoginException.class

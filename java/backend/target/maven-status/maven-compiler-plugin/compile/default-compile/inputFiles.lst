@@ -6,4 +6,6 @@
 /home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/utils/CustomLogger.java
 /home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/app/App.java
 /home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/entities/User.java
+/home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/utils/ContextLoaderListener.java
+/home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/servlets/UserServlet.java
 /home/tmwangi/code/projects/FoundationProject-Trevor/java/backend/src/main/java/dao/UserDAO.java

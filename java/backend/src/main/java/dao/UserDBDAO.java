@@ -117,7 +117,6 @@ public class UserDBDAO implements UserDAO {
                 resultSet.next();
                 return resultSet.getInt(1);
 
-
             }
         } catch (SQLException e) {
             System.out.println(" User creation failed");

@@ -20,12 +20,18 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
     </dependencies>
 
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <jackson-version>2.13.3</jackson-version>
     </properties>
     <build>
         <plugins>
@@ -34,7 +40,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>http://localhost:8080/manger/text</url>
+                    <url>http://localhost:8080/manager/text</url>
                     <server>LocalTomcat</server>
                     <path>/home</path>
                     <update>true</update>
