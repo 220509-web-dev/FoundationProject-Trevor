@@ -9,9 +9,10 @@ function login() {
   let username = document.getElementById("username").value;
   let password = document.getElementById("password").value;
 
+  let errorContainer = document.getElementById('error-message');
+
   if (username && password) {
 
-    let errorContainer = document.getElementById('error-message');
     errorContainer.setAttribute('hidden', true)
 
     let resData = fetch('http://localhost:8080/home/auth/login', {
@@ -38,7 +39,7 @@ function login() {
     })
 
   } else {
-    let errorContainer = document.getElementById('error-message');
+    
     errorContainer.removeAttribute('hidden')
     errorContainer.innerText = "Provide a Username and Password"
   }

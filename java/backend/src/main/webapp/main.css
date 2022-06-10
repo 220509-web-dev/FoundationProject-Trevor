@@ -1,7 +1,16 @@
+
+html{
+  background-image: linear-gradient(to left, #051937, #122a4c, #203c62, #2c4f79, #396390);
+}
+body{
+  background-image: linear-gradient(to left, #051937, #122a4c, #203c62, #2c4f79, #396390);
+}
 main {
   margin: 5% 10%
 }
-
+h1{
+  color: white;
+}
 /* Tag selector */
 button {
   font-family: Arial, Heletica, sans-serif !important;
@@ -11,11 +20,16 @@ button {
 .btn {
   color: green;
 }
-
+h1.h3.mb-3.fw-normal.text-center {
+  color: white;
+}
+.navbar-dark{
+  background-color: #11284a;
+}
 /* Id selector */
 #login-btn {
   color: white;
-  background-color: deepskyblue;
+  background-color: rgb(165, 194, 204);
   font-family: "Times New Roman", Times, serif !important;
 }
 
@@ -43,5 +57,5 @@ div + button {
 
 /* CSS Pseudo classes */
 button:hover {
-  background-color: purple !important;
+  background-color: rgb(43, 28, 28) !important;
 }
