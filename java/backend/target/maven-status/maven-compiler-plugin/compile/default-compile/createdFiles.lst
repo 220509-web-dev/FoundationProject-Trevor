@@ -7,6 +7,8 @@ servlets/SanityServlet.class
 dao/UserDAO.class
 entities/User.class
 app/App.class
+dto/ResourceCreationResponse.class
+services/AuthService.class
 utils/ContextLoaderListener.class
 servlets/UserServlet.class
 utils/exceptions/UnavailableUsernameException.class

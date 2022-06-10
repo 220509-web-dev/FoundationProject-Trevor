@@ -3,7 +3,9 @@ package servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.UserDAO;
 import dao.UserDBDAO;
+import dto.ResourceCreationResponse;
 import entities.User;
+import services.UserService;
 import utils.CustomLogger;
 
 import javax.servlet.ServletException;
@@ -20,6 +22,11 @@ import java.util.List;
 
 public class UserServlet extends HttpServlet {
 
+
+    private  final ObjectMapper mapper;
+    private final UserDBDAO dbDao;
+
+    private  final UserService service;
     @Override
     public void init() throws ServletException {
         System.out.println("[LOG] - UserServlet instantiated!");
@@ -27,32 +34,50 @@ public class UserServlet extends HttpServlet {
         System.out.println("[LOG] - Context param, test-context-key: " + this.getServletContext().getInitParameter("test-context-key"));
     }
 
-    private  final ObjectMapper mapper;
 
-    public  UserServlet(ObjectMapper mapper) {
+    public  UserServlet(ObjectMapper mapper, UserDBDAO dbDao, UserService service) {
         this.mapper = mapper;
+        this.dbDao = dbDao;
+        this.service = service;
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("[LOG] - UserServlet received a GET request at " + LocalDateTime.now());
-        // Find all users
-            try {
-                UserDAO dao = new UserDBDAO();
-                List<User> allUsers = dao.getAllUsers();
-                String allUsersString = allUsers.toString();
+
+        String potentialUsername = req.getParameter("username");
+        String potentialId = req.getParameter("id");
 
 
-                String resPayload = mapper.writeValueAsString(allUsers);
-                resp.setContentType("application/json");
-                resp.getWriter().write(resPayload);
+        if(potentialId != null){
+            // search by Id
+            User userWithId = dbDao.getById(Integer.parseInt(potentialId));
 
-                System.out.println(allUsersString);
+            String resPayload = mapper.writeValueAsString(userWithId);
+            resp.setContentType("application/json");
+            resp.getWriter().write(resPayload);
+
+        } else if (potentialUsername != null) {
+            //search by username
+            User userWithName = dbDao.getByUsername(potentialUsername);
+
+            String resPayload = mapper.writeValueAsString(userWithName);
+            resp.setContentType("application/json");
+            resp.getWriter().write(resPayload);
+        }else {
+            //search all users
+            List<User> allUsers = dbDao.getAllUsers();
+
+            String resPayload = mapper.writeValueAsString(allUsers);
+            resp.setContentType("application/json");
+            resp.getWriter().write(resPayload);
+        }
+        try {
+
+
             } catch (Exception e) {
                 CustomLogger.writeToLog(e.toString());
                 e.printStackTrace();
             }
-            // Find by id
-        String username = req.getParameter("username");
 
     }
 
@@ -60,9 +85,19 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("[LOG] - UserServlet received a POST request at " + LocalDateTime.now());
 
-       User newUser =  mapper.readValue(req.getInputStream(), User.class);
-       System.out.println(newUser);
+        try {
+            User newUser = mapper.readValue(req.getInputStream(), User.class);
 
-        resp.setStatus(204);
+            ResourceCreationResponse payload = service.createNewUser(newUser);
+            System.out.println(newUser);
+            resp.setStatus(201);
+            resp.setContentType("application/json");
+            resp.getWriter().write(mapper.writeValueAsString(payload));
+
+
+        } catch (Exception e) {
+            CustomLogger.writeToLog(e.toString());
+            e.printStackTrace();
+        }
     }
 }

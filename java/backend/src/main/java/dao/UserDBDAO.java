@@ -95,13 +95,13 @@ public class UserDBDAO implements UserDAO {
     }
 
     @Override
-    public int create(User newUser) {
+    public User create(User newUser) {
         try (Connection con = ConnectionUtility.getInstance().getConnection()){
             String sql = "INSERT INTO app_users (first_name, last_name, email, username, password) "
                         + "VALUES (?, ?, ?, ?, ?) "
                         + "RETURNING app_users.id";
 
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, newUser.getFirstName());
             preparedStatement.setString(2, newUser.getLastName());
@@ -109,19 +109,21 @@ public class UserDBDAO implements UserDAO {
             preparedStatement.setString(4, newUser.getUsername());
             preparedStatement.setString(5, newUser.getPassword());
 
-            ResultSet resultSet;
+            int rowsInserted =  preparedStatement.executeUpdate();
 
-            if ((resultSet = preparedStatement.executeQuery()) != null) {
-                System.out.println(" Welcome new user");
+            if (rowsInserted != 0) {
+                ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 resultSet.next();
-                return resultSet.getInt(1);
+                int newId = resultSet.getInt("id");
 
+                newUser.setId(newId);
+                return newUser;
             }
         } catch (SQLException e) {
             System.out.println(" User creation failed");
             e.printStackTrace();
 
         }
-        return newUser.getId();
+        return null;
     }
 }

@@ -5,7 +5,7 @@ public class UnavailableUsernameException extends RuntimeException {
         super("Invalid Username, enter a new username");
     }
 
-    UnavailableUsernameException(String msg) {
+    public UnavailableUsernameException(String msg) {
         super(msg);
     }
 }

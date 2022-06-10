@@ -8,6 +8,6 @@ public interface UserDAO {
     User getById(int id);
     User getByUsername(String username);
     List<User> getAllUsers();
-    int create(User newUser);
+    User create(User newUser);
 
 }

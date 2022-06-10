@@ -2,6 +2,7 @@ package servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.User;
+import services.AuthService;
 import utils.CustomLogger;
 import utils.exceptions.InvalidLoginException;
 import utils.exceptions.UnavailableUsernameException;
@@ -10,16 +11,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class AuthServlet extends HttpServlet {
     private final ObjectMapper mapper;
+    private  final AuthService authService;
 
-
-    public AuthServlet(ObjectMapper mapper) {
+    public AuthServlet(ObjectMapper mapper, AuthService authService) {
         this.mapper = mapper;
+        this.authService = authService;
     }
 
     @Override
@@ -36,14 +39,16 @@ public class AuthServlet extends HttpServlet {
 
         User userCredentials = mapper.readValue(body, User.class);
 
-        String uri = req.getRequestURI().replace("/UMS/auth/", "");
+        String uri = req.getRequestURI().replace("/home/auth/", "");
 
         if (uri.equals("register")) {
             try {
-                // Add services
-                /*
+               authService.register(userCredentials);
 
-                 */
+               PrintWriter writer = resp.getWriter();
+               writer.println("User registered successfully");
+               resp.setStatus(201);
+
             } catch (UnavailableUsernameException e) {
                 CustomLogger.writeToLog(e.toString());
                 e.printStackTrace();
@@ -54,10 +59,17 @@ public class AuthServlet extends HttpServlet {
             }
         } else if (uri.equals("login")) {
             try {
-                // Add services
-                /*
 
-                 */
+                User user = authService.login(userCredentials.getUsername(), userCredentials.getPassword());
+
+                HttpSession session = req.getSession();
+                session.setAttribute("currentUser", user);
+
+                PrintWriter writer = resp.getWriter();
+                writer.println(mapper.writeValueAsString(user));
+
+                resp.setStatus(202);
+                resp.setContentType("application/json");
             } catch (InvalidLoginException e) {
                 CustomLogger.writeToLog(e.toString());
                 e.printStackTrace();

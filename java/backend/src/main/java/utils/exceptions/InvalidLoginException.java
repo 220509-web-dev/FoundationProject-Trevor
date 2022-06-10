@@ -2,11 +2,11 @@ package utils.exceptions;
 
 public class InvalidLoginException extends RuntimeException{
 
-     InvalidLoginException() {
+    public InvalidLoginException() {
         super("Invalid Login credentials, try again");
     }
 
-     InvalidLoginException(String msg) {
+     public InvalidLoginException(String msg) {
         super(msg);
     }
 }
