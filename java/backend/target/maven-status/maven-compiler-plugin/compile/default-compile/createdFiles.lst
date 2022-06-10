@@ -3,6 +3,7 @@ utils/CustomLogger.class
 servlets/AuthServlet.class
 services/UserService.class
 dao/UserDBDAO.class
+filters/CorsFilter.class
 servlets/SanityServlet.class
 dao/UserDAO.class
 entities/User.class
